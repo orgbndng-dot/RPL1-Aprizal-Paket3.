@@ -1,0 +1,245 @@
+/* =========================================================
+   LAPORAN & MONITORING — SPIDER-MAN EXTENSION
+   ========================================================= */
+
+.stat-row{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:14px;
+  margin:4px 0 20px;
+}
+
+.stat-box{
+  position:relative;
+  overflow:hidden;
+  min-height:108px;
+  padding:18px;
+  border:1px solid rgba(255,255,255,.85);
+  border-radius:18px;
+  background:rgba(255,255,255,.88);
+  box-shadow:0 10px 28px rgba(7,27,58,.08);
+  transition:transform .28s cubic-bezier(.22,1,.36,1),box-shadow .28s cubic-bezier(.22,1,.36,1);
+}
+
+.stat-box::after{
+  content:"";
+  position:absolute;
+  right:-30px;
+  bottom:-42px;
+  width:100px;
+  height:100px;
+  border:1px solid currentColor;
+  border-radius:50%;
+  opacity:.08;
+}
+
+.stat-box:hover{
+  transform:translateY(-4px);
+  box-shadow:0 17px 34px rgba(7,27,58,.12);
+}
+
+.stat-box .label{
+  color:#758198;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+.stat-box .num{
+  margin-top:5px;
+  color:#071b3a;
+  font-size:30px;
+  font-weight:900;
+  letter-spacing:-.04em;
+}
+
+.stat-box.menunggu{
+  color:#e28a00;
+  border-top:3px solid #e28a00;
+}
+
+.stat-box.diproses{
+  color:#1478d4;
+  border-top:3px solid #1478d4;
+}
+
+.stat-box.selesai{
+  color:#15945c;
+  border-top:3px solid #15945c;
+}
+
+.stat-box.ditolak{
+  color:#c51c31;
+  border-top:3px solid #c51c31;
+}
+
+.topnav{
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+  margin:0 0 24px;
+  padding:13px 16px;
+  border:1px solid rgba(255,255,255,.72);
+  border-radius:17px;
+  color:#fff;
+  background:linear-gradient(110deg,#071b3a,#0b2d5c 58%,#a70718 180%);
+  box-shadow:0 12px 30px rgba(7,27,58,.13);
+  overflow:hidden;
+}
+
+.topnav::after{
+  content:"";
+  position:absolute;
+  width:170px;
+  height:170px;
+  right:-80px;
+  top:-110px;
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:50%;
+  box-shadow:0 0 0 22px rgba(255,255,255,.035),0 0 0 44px rgba(255,255,255,.025);
+  pointer-events:none;
+}
+
+.topnav > *{
+  position:relative;
+  z-index:1;
+}
+
+.topnav a{
+  display:inline-flex;
+  align-items:center;
+  min-height:36px;
+  padding:7px 11px;
+  color:rgba(255,255,255,.72);
+  text-decoration:none;
+  border-radius:10px;
+  font-size:12px;
+  font-weight:750;
+  transition:background .22s ease,color .22s ease,transform .22s ease;
+}
+
+.topnav a:hover,
+.topnav a.active{
+  color:#fff;
+  background:rgba(255,255,255,.12);
+}
+
+.topnav a:hover{
+  transform:translateY(-1px);
+}
+
+.topnav .who{
+  color:rgba(255,255,255,.78);
+  font-size:12px;
+}
+
+.topnav .who a{
+  padding:3px 7px;
+  color:#fff;
+}
+
+.timeline{
+  position:relative;
+  list-style:none;
+  margin:18px 0 0 8px;
+  padding:0 0 0 24px;
+  border-left:2px solid rgba(229,9,32,.18);
+}
+
+.timeline li{
+  position:relative;
+  margin:0 0 22px;
+}
+
+.timeline li::before{
+  content:"";
+  position:absolute;
+  left:-31px;
+  top:4px;
+  width:13px;
+  height:13px;
+  border:3px solid #fff;
+  border-radius:50%;
+  background:#e50920;
+  box-shadow:0 0 0 3px rgba(229,9,32,.18);
+}
+
+.timeline .when,
+.timeline .by{
+  display:block;
+  color:#7b879b;
+  font-size:11px;
+}
+
+.timeline .text{
+  margin-top:5px;
+  color:#24334d;
+  white-space:pre-line;
+}
+
+.meta-grid{
+  display:grid;
+  grid-template-columns:145px 1fr;
+  gap:9px 14px;
+  margin:12px 0;
+}
+
+.meta-grid dt{
+  color:#7b879b;
+  font-size:12px;
+  font-weight:650;
+}
+
+.meta-grid dd{
+  margin:0;
+  color:#1d2d49;
+  font-size:13px;
+  font-weight:650;
+}
+
+.isi-box{
+  margin:10px 0;
+  padding:15px;
+  color:#253550;
+  background:#f5f8fc;
+  border:1px solid rgba(20,33,61,.08);
+  border-radius:14px;
+  white-space:pre-line;
+}
+
+.link-small{
+  font-size:12px;
+}
+
+@media (max-width:900px){
+  .stat-row{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+
+@media (max-width:560px){
+  .stat-row{
+    grid-template-columns:1fr;
+  }
+
+  .topnav{
+    align-items:stretch;
+  }
+
+  .topnav > div:first-child{
+    display:flex;
+    overflow-x:auto;
+  }
+
+  .topnav .who{
+    padding:3px 4px;
+  }
+
+  .timeline{
+    padding-left:19px;
+  }
+}

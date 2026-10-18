@@ -1,0 +1,1 @@
+<?php include 'auth.php'; include 'conection.php'; $id=(int)($_GET['id']??0); if($id<1) die('ID siswa tidak valid.'); $stmt=$conn->prepare('DELETE FROM siswa WHERE id_siswa=?'); $stmt->bind_param('i',$id); if($stmt->execute()) header('Location: siswa.php'); else die('Gagal menghapus siswa: '.htmlspecialchars($stmt->error)); exit;

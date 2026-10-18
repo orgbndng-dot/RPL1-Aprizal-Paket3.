@@ -1,0 +1,1 @@
+<?php include 'auth.php'; include 'conection.php'; $id=(int)($_GET['id']??0); if($id<1) die('ID kategori tidak valid.'); $stmt=$conn->prepare('DELETE FROM kategori WHERE id_kategori=?'); $stmt->bind_param('i',$id); $stmt->execute(); header('Location: kategori.php'); exit;

@@ -1,0 +1,12 @@
+<?php include "auth.php"; include "conection.php";
+$q=trim($_GET['q']??'');
+$sql="SELECT a.id_aspirasi,a.tanggal,a.kategori,a.isi_aspirasi,s.nama_siswa,s.nisn,s.kelas,s.jurusan FROM id_aspirasi a JOIN siswa s ON s.id_siswa=a.id_siswa";
+if($q!==''){ $safe=$conn->real_escape_string($q); $sql.=" WHERE s.nama_siswa LIKE '%$safe%' OR s.nisn LIKE '%$safe%' OR a.kategori LIKE '%$safe%' OR a.isi_aspirasi LIKE '%$safe%'"; }
+$sql.=" ORDER BY a.id_aspirasi DESC"; $result=$conn->query($sql);
+?>
+<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Data Aspirasi</title><link rel="stylesheet" href="./data.css?v=spiderman2026"></head><body><div class="app"><?php include "header.php";?>
+<div class="topbar"><div><p class="eyebrow">PENGELOLAAN ASPIRASI</p><h1>Data Aspirasi</h1><p class="subtitle">Kelola laporan dan masukan terkait sarana prasarana sekolah.</p></div></div>
+<div class="card"><div class="card-head"><h2>Daftar Aspirasi</h2><div class="toolbar"><form><input class="input-search" name="q" value="<?=htmlspecialchars($q)?>" placeholder="Cari siswa, kategori, aspirasi..."></form><a class="btn btn-primary" href="tambah.php">＋ Tambah</a></div></div>
+<div class="table-wrap"><table><thead><tr><th>ID</th><th>Tanggal</th><th>Siswa</th><th>NISN</th><th>Kelas</th><th>Jurusan</th><th>Kategori</th><th>Isi Aspirasi</th><th>Aksi</th></tr></thead><tbody>
+<?php if($result && $result->num_rows): while($r=$result->fetch_assoc()): ?><tr><td><?=$r['id_aspirasi']?></td><td><?=htmlspecialchars($r['tanggal'])?></td><td><b><?=htmlspecialchars($r['nama_siswa'])?></b></td><td><?=htmlspecialchars($r['nisn'])?></td><td><?=htmlspecialchars($r['kelas'])?></td><td><?=htmlspecialchars($r['jurusan'])?></td><td><span class="badge"><?=htmlspecialchars($r['kategori'])?></span></td><td><?=nl2br(htmlspecialchars($r['isi_aspirasi']))?></td><td><a class="btn-edit" href="edit.php?id=<?=$r['id_aspirasi']?>">Edit</a><a class="btn-hapus" href="hapus.php?id=<?=$r['id_aspirasi']?>" onclick="return confirm('Hapus data ini?')">Hapus</a></td></tr><?php endwhile; else: ?><tr><td colspan="9" class="empty">Data tidak ditemukan.</td></tr><?php endif;?></tbody></table></div></div>
+<?php include "footer.php"; ?></div></body></html>

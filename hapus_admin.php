@@ -1,0 +1,1 @@
+<?php include "auth.php";include "conection.php";$id=(int)($_GET['id']??0);if($id===((int)($_SESSION['id_user']??0)))die("Akun yang sedang digunakan tidak dapat dihapus.");$s=$conn->prepare("DELETE FROM users WHERE id_user=?");$s->bind_param("i",$id);$s->execute();header("Location:admin.php");exit;

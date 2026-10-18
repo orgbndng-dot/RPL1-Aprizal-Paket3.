@@ -1,0 +1,1 @@
+<div class="footer">Aplikasi Web Sarpras Sekolah • Muhamad Aprizal</div></div>
